@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página de Kati</title>
+  <style>
+    /* Estilos generales */
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ffb83d, #f8f3b4);
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      height: 100vh;
+      position: relative;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #4e4e4e;
+      padding-top: 20px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    #mainButton {
+      display: block;
+      margin: 20px auto;
+      background-color: #ffcc00;
+      padding: 20px 50px;
+      font-size: 1.5em;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: white;
+    }
+
+    #mainButton:hover {
+      background-color: #ffaa00;
+      transform: scale(1.1);
+    }
+
+    #message {
+      font-size: 1.5em;
+      margin-top: 30px;
+      opacity: 0;
+      transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+      background: linear-gradient(45deg, #77dd77, #ff77ff);
+      -webkit-background-clip: text;
+      color: transparent;
+      transform: scale(0.8);
+    }
+
+    /* Cuadro creativo al final */
+    #finalBox {
+      margin: 30px auto;
+      padding: 20px;
+      max-width: 80%;
+      border: 3px dashed #ffaa00;
+      border-radius: 15px;
+      background-color: rgba(255, 255, 255, 0.8);
+      font-size: 1.2em;
+      color: #4e4e4e;
+      display: none;
+      animation: slideUp 1.5s ease-in-out;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Animación de corazones flotando */
+    .heart {
+      position: absolute;
+      color: red;
+      font-size: 2em;
+      animation: floatUp 4s infinite linear;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+    }
+
+    /* Animación de entrada */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Ten tus flores amarillas, Kati :)</h1>
+
+  <button id="mainButton" onclick="startInteraction()">APLASTAAAAAAA!!!😡🌻</button>
+
+  <div id="message"></div>
+  <div id="finalBox"></div>
+
+  <script>
+    const messages = [
+      "Eres mi sol 🌞💛",
+      "Tu sonrisa ilumina mi mundo 🌸💖",
+      "Te quiero más que a las estrellas ✨❤️",
+      "Siempre estaré a tu lado 🌹💗",
+      "Tu amor me llena de vida 🌻💛",
+      "Eres mi todo 💝🌼",
+      "Contigo hasta el final del mundo.🌍💖"
+    ];
+
+    let currentMessageIndex = 0;
+    let messageArea = document.getElementById("message");
+    let finalBox = document.getElementById("finalBox");
+
+    function startInteraction() {
+      document.getElementById("mainButton").style.display = "none"; // Ocultar botón
+      showNextMessage(); 
+      playSound();
+      createHearts();
+    }
+
+    function showNextMessage() {
+      if (currentMessageIndex < messages.length) {
+        messageArea.innerHTML = messages[currentMessageIndex];
+        messageArea.style.opacity = 1;
+        messageArea.style.transform = "scale(1)";
+        currentMessageIndex++;
+        setTimeout(() => {
+          messageArea.style.opacity = 0;
+          messageArea.style.transform = "scale(0.8)";
+          setTimeout(showNextMessage, 1000);
+        }, 3000);
+      } else {
+        // Mostrar mensaje final y cuadro creativo
+        messageArea.innerHTML = "¡Te quiero mucho, Kati! 💛";
+        messageArea.style.opacity = 1;
+        messageArea.style.transform = "scale(1)";
+
+        finalBox.innerHTML = "<strong>Vienen más cosas:</strong> esto es lo sencillo, sé que no verás flores aquí, tendrás que esperar unos segundos ♥️, Feliz dia de flore";
+        finalBox.style.display = "block";
+
+        // Redirigir a la página web después de 10 segundos
+        setTimeout(() => {
+          window.location.href = "https://www.rosify.org/rose/0nif58blu";
+        }, 10000);
+      }
+    }
+
+    function playSound() {
+      let audio = new Audio("https://www.fesliyanstudios.com/play-mp3/387");
+      audio.play();
+    }
+
+    function createHearts() {
+      setInterval(() => {
+        let heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 4000);
+      }, 500);
+    }
+  </script>
+
+</body>
+</html>
